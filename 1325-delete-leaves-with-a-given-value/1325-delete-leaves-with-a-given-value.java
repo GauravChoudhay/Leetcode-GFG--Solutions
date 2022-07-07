@@ -25,11 +25,8 @@ class Solution {
             return null;
         }
 
-        TreeNode left = removeLeafNodes(root.left,target);
-        TreeNode right = removeLeafNodes(root.right,target);
-
-        root.left = left;
-        root.right = right;
+        root.left = removeLeafNodes(root.left,target);
+        root.right = removeLeafNodes(root.right,target);
         
         if(root.left == null && root.right == null && root.val == target){
             return null;
