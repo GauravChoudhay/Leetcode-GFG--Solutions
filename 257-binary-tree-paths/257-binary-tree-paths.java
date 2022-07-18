@@ -36,17 +36,15 @@ class Solution {
         if(root == null) return ;
         
         int len = sb.length();// inital length nikal li sb ki taki sb.setLength se backtracking kar sake
+        sb.append(root.val);
         
         if(root.left==null && root.right==null){
-            sb.append(root.val);
             list.add(sb.toString());
             sb.setLength(len);// backtarking before return                                    
             return ;
-        }       
-        
-        
-        sb.append(root.val+"->");
-        
+        }    
+               
+        sb.append("->");        
         binaryTreePathsHelper(root.left,sb,list);
         binaryTreePathsHelper(root.right,sb,list);
         
