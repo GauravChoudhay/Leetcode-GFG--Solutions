@@ -29,21 +29,20 @@ class Solution {
         if(root == null) return ;
         
         int len = path.length();// inital length nikal li path ki taki path.setLength se backtracking kar sake
+        path.append(root.val);
         
-        
-        if(root.left==null && root.right==null){
-            path.append(root.val);
+        if(root.left==null && root.right==null){            
             list.add(path.toString());
-            path.setLength(len);// backtarking before return                                    
+            path.setLength(len);// backtrsking before return                                    
             return ;
         }
         
-        path.append(root.val+"->");
+        path.append("->");
         
         binaryTreePathsHelper(root.left,path,list);
         binaryTreePathsHelper(root.right,path,list);
         
-        path.setLength(len);// backtarking before return  
+        path.setLength(len);// backtrsking before return  
     }
         
     
