@@ -17,38 +17,33 @@ class Solution {
     public List<String> binaryTreePaths(TreeNode root) {
         
         List<String> list = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
+        StringBuilder path = new StringBuilder();        
         
-        if(root.left==null && root.right==null){
-            sb.append(root.val);
-            list.add(sb.toString());
-            return list;
-        }
-        
-        
-        binaryTreePathsHelper(root,sb,list);
+        binaryTreePathsHelper(root,path,list);
         return list;
         
     }
     
-    public void binaryTreePathsHelper(TreeNode root,StringBuilder sb,List<String> list){
+    public void binaryTreePathsHelper(TreeNode root,StringBuilder path,List<String> list){
         
         if(root == null) return ;
         
-        int len = sb.length();// inital length nikal li sb ki taki sb.setLength se backtracking kar sake
-        sb.append(root.val);
+        int len = path.length();// inital length nikal li path ki taki path.setLength se backtracking kar sake
+        
         
         if(root.left==null && root.right==null){
-            list.add(sb.toString());
-            sb.setLength(len);// backtarking before return                                    
+            path.append(root.val);
+            list.add(path.toString());
+            path.setLength(len);// backtarking before return                                    
             return ;
-        }    
-               
-        sb.append("->");        
-        binaryTreePathsHelper(root.left,sb,list);
-        binaryTreePathsHelper(root.right,sb,list);
+        }
         
-        sb.setLength(len);// backtarking before return  
+        path.append(root.val+"->");
+        
+        binaryTreePathsHelper(root.left,path,list);
+        binaryTreePathsHelper(root.right,path,list);
+        
+        path.setLength(len);// backtarking before return  
     }
         
     
