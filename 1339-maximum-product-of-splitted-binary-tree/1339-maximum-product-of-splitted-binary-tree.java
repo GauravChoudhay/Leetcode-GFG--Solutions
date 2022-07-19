@@ -22,23 +22,23 @@ class Solution {
         return root.val;
     }
     
-    public long maxProductHelper2(TreeNode root,long total) {
+    public long maxProductHelper(TreeNode root,long total) {
         
         if(root==null) return 0l;
-        if(root.left==null && root.right==null) return 0l;
+        if(root.left==null && root.right==null) return 0l; //if its a leaf node there is no edge generating form it so no need to check anything jsut return 
         
-        long max = 0;
+        long max = 0l;
         
         if(root.left!=null){
-            max = Math.max(max,(total-root.left.val) * root.left.val);
+            max = Math.max(max,(total-root.left.val) * root.left.val);// checking if my left edge is having maxproduct
         
-            max = Math.max(max,maxProductHelper2(root.left,total));
+            max = Math.max(max,maxProductHelper(root.left,total));// checking if my left subtree has any edge having max product 
         }
         
         if(root.right!=null){
-            max = Math.max(max,(total-root.right.val) * root.right.val);
+            max = Math.max(max,(total-root.right.val) * root.right.val);// checking if my right edge is having maxproduct
         
-            max = Math.max(max,maxProductHelper2(root.right,total));
+            max = Math.max(max,maxProductHelper(root.right,total));// checking if my right subtree has any edge having max product 
         }       
         
         
@@ -50,7 +50,7 @@ class Solution {
         
         long total = (long) sumTree(root);
         
-        long maxProduct = maxProductHelper2(root,total);
+        long maxProduct = maxProductHelper(root,total);
         
         return (int) (maxProduct %1000000007l);
     }
