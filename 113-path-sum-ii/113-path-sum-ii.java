@@ -21,14 +21,10 @@ class Solution {
         
         if(root.left==null && root.right==null && targetSum==root.val){
             path.add(root.val);
-            ArrayList base = new ArrayList<>();
             
-            for(int val:path){
-                base.add(val);
-            }
+            paths.add(new ArrayList<>(path));//one liner for deep copy Arraylist            
             
-            paths.add(base);            
-            path.remove(path.size()-1);
+            path.remove(path.size()-1);//backtrack
         }
         
         
@@ -37,7 +33,7 @@ class Solution {
         pathSumHelper(root.left,targetSum-root.val,path,paths);
         pathSumHelper(root.right,targetSum-root.val,path,paths);
         
-        path.remove(path.size()-1);
+        path.remove(path.size()-1);//backtrack
         
     }
     
