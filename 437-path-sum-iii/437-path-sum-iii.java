@@ -15,36 +15,22 @@
  */
 class Solution {
     
-    int count;
-    
-    public void nodeToAnyNodePathCount(TreeNode root, long tar){       
+    public int dfs(TreeNode root, long tar){       
                 
-        if(root==null) return ;
+        if(root==null) return 0 ;
         
-        if(tar==root.val) count++;     
+        int count = 0;
+        if(tar==root.val) count = 1;   
                 
         
-        nodeToAnyNodePathCount(root.left,tar-root.val);
-        nodeToAnyNodePathCount(root.right,tar-root.val);
-        return;
+        return count + dfs(root.left,tar-root.val) + dfs(root.right,tar-root.val);
         
     }
-    public void pathSumHelper(TreeNode root, int targetSum) {
-        
-        if(root==null) return ;        
-        
-        nodeToAnyNodePathCount(root,(long)targetSum);
-        
-        pathSumHelper(root.left,targetSum);
-        pathSumHelper(root.right,targetSum);
-        
-    }
-    
     public int pathSum(TreeNode root, int targetSum) {
         
-        count = 0;
-        pathSumHelper(root,targetSum);
-        return count;
+        if(root==null) return 0;        
+        
+        return dfs(root,(long)targetSum) + pathSum(root.left,targetSum) + pathSum(root.right,targetSum);
     }
 }
 
