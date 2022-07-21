@@ -29,12 +29,8 @@ class Solution {
         count += dfs(root.left,tar,freq,prefSum);
         count += dfs(root.right,tar,freq,prefSum);
         
-        if(freq.get(prefSum)>1){
-            freq.put(prefSum,freq.getOrDefault(prefSum,0)-1);
-        }
-        else{
-            freq.remove(prefSum);
-        }
+        freq.put(prefSum,freq.getOrDefault(prefSum,0)-1);//backtrack
+        
         
         return count;
         
