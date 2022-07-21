@@ -15,22 +15,37 @@
  */
 class Solution {
     
-    public int dfs(TreeNode root, long tar){       
-                
-        if(root==null) return 0 ;
+    public int dfs(TreeNode root, long tar, HashMap<Long,Integer> freq, long prefSum ){       
         
-        int count = 0;
-        if(tar==root.val) count = 1;   
-                
         
-        return count + dfs(root.left,tar-root.val) + dfs(root.right,tar-root.val);
+        if(root==null) return 0;
+        
+        prefSum+=root.val;
+        
+        int count = freq.getOrDefault(prefSum-tar,0);
+        
+        freq.put(prefSum,freq.getOrDefault(prefSum,0)+1);
+        
+        count += dfs(root.left,tar,freq,prefSum);
+        count += dfs(root.right,tar,freq,prefSum);
+        
+        if(freq.get(prefSum)>1){
+            freq.put(prefSum,freq.getOrDefault(prefSum,0)-1);
+        }
+        else{
+            freq.remove(prefSum);
+        }
+        
+        return count;
         
     }
     public int pathSum(TreeNode root, int targetSum) {
         
-        if(root==null) return 0;        
+        HashMap<Long,Integer> freq = new HashMap<>();
+        freq.put(0l,1);
         
-        return dfs(root,(long)targetSum) + pathSum(root.left,targetSum) + pathSum(root.right,targetSum);
+        return dfs(root,(long)targetSum,freq,0);
+        
     }
 }
 
